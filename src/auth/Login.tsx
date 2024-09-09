@@ -87,6 +87,9 @@ const Login = () => {
               Login
             </Button>
           )}
+          <p className="text-center pt-3">
+            <Link to="/forgot-password" className="hover:text-red-500 hover:underline">Forgot Password</Link>
+          </p>
         </div>
         <Separator />
         <p className="mt-2 text-center">
