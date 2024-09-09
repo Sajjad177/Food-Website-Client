@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
-import { SignUpInputState } from "@/Schema/userSchema";
+import { SignUpInputState, userSignUpSchema } from "@/Schema/userSchema";
 import { Loader2, LockKeyhole, Mail, PhoneCallIcon, User } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
@@ -15,6 +15,8 @@ const SignUp = () => {
     contact: "",
   });
 
+  const [errors, setErrors] = useState<Partial<SignUpInputState>>({});
+
   const ChangeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
@@ -22,6 +24,14 @@ const SignUp = () => {
 
   const SignUpSubmitHandler = (e: FormEvent) => {
     e.preventDefault();
+    //Form validation checking ->
+    const result = userSignUpSchema.safeParse(input);
+    if (!result.success) {
+      const fieldErrors = result.error.formErrors.fieldErrors;
+      setErrors(fieldErrors as Partial<SignUpInputState>);
+      return;
+    }
+    // Login api implementation :
     console.log(input);
   };
 
@@ -44,6 +54,9 @@ const SignUp = () => {
             className="pl-10 focus-visible:ring-1"
           />
           <User className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
+          {errors && (
+            <span className="text-sm text-red-600">{errors.fullName}</span>
+          )}
         </div>
         <div className="relative mb-3">
           <Input
@@ -55,6 +68,9 @@ const SignUp = () => {
             className="pl-10 focus-visible:ring-1"
           />
           <Mail className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
+          {errors && (
+            <span className="text-sm text-red-600">{errors.email}</span>
+          )}
         </div>
         <div className="relative mb-3">
           <Input
@@ -66,6 +82,9 @@ const SignUp = () => {
             className="pl-10 focus-visible:ring-1"
           />
           <LockKeyhole className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
+          {errors && (
+            <span className="text-sm text-red-600">{errors.password}</span>
+          )}
         </div>
         <div className="relative">
           <Input
@@ -77,6 +96,9 @@ const SignUp = () => {
             className="pl-10 focus-visible:ring-1"
           />
           <PhoneCallIcon className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
+          {errors && (
+            <span className="text-sm text-red-600">{errors.contact}</span>
+          )}
         </div>
         <div className="mb-10 mt-5">
           {/* Login loading spinner added */}
