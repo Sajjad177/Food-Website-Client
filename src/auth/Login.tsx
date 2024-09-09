@@ -33,68 +33,72 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
       <form
         onSubmit={LoginSubmitHandler}
-        className="md:p-8 w-full max-w-md md:border border-gray-200 rounded-lg mx-4"
+        className="bg-white p-6 md:p-8 w-full max-w-md md:border md:shadow-lg border-none shadow-none rounded-lg"
       >
-        <div className="mb-4 text-center">
-          <h1 className="font-bold text-2xl">Food House</h1>
+        <div className="mb-6 text-center">
+          <h1 className="font-bold text-3xl text-gray-800">Food House</h1>
         </div>
-        <div className="relative mb-3">
+        <div className="relative mb-4">
           <Input
             type="email"
             name="email"
             value={input.email}
             onChange={ChangeEventHandler}
             placeholder="Enter your email"
-            className="pl-10 focus-visible:ring-1"
+            className="pl-10 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 w-full"
           />
-          <Mail className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-          {errors && (
+          <Mail className="absolute inset-y-2 left-3 text-gray-500 pointer-events-none" />
+          {errors?.email && (
             <span className="text-sm text-red-600">{errors.email}</span>
           )}
         </div>
-        <div className="relative">
+        <div className="relative mb-6">
           <Input
             type="password"
             name="password"
             placeholder="Enter your password"
             value={input.password}
             onChange={ChangeEventHandler}
-            className="pl-10 focus-visible:ring-1"
+            className="pl-10 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-indigo-500 w-full"
           />
-          <LockKeyhole className="absolute inset-y-2 left-2 text-gray-500 pointer-events-none" />
-          {errors && (
+          <LockKeyhole className="absolute inset-y-2 left-3 text-gray-500 pointer-events-none" />
+          {errors?.password && (
             <span className="text-sm text-red-600">{errors.password}</span>
           )}
         </div>
-        <div className="mb-10 mt-5">
-          {/* Login loading spinner added */}
+        <div className="mb-8">
           {loading ? (
             <Button
               disabled
-              className="bg-firstColor hover:bg-hoverColor w-full"
+              className="bg-indigo-600 text-white w-full py-2 rounded-md flex justify-center items-center"
             >
-              <Loader2 className="mr-4 h-4 w-4 animate-spin" />
+              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
               Please Wait
             </Button>
           ) : (
             <Button
               type="submit"
-              className="bg-firstColor hover:bg-hoverColor w-full"
+              className="bg-indigo-600 hover:bg-indigo-700 text-white w-full py-2 rounded-md transition-all"
             >
               Login
             </Button>
           )}
-          <p className="text-center pt-3">
-            <Link to="/forgot-password" className="hover:text-red-500 hover:underline">Forgot Password</Link>
+          <p className="text-center pt-4">
+            <Link
+              to="/forgot-password"
+              className="hover:text-indigo-600 hover:underline"
+            >
+              Forgot Password?
+            </Link>
           </p>
         </div>
-        <Separator />
-        <p className="mt-2 text-center">
-          Don't Have account
-          <Link to="/signUp" className="text-red-500 underline ml-2">
+        <Separator className="my-4" />
+        <p className="text-center text-gray-600">
+          Don't have an account?
+          <Link to="/signUp" className="text-indigo-600 underline ml-2">
             Sign Up
           </Link>
         </p>
