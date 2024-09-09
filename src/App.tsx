@@ -1,12 +1,13 @@
-import { Button } from "./components/ui/button";
-
+import Login from "./auth/Login";
 
 const App = () => {
   return (
     <div>
-      <Button className="bg-firstColor hover:bg-hoverColor ">Click me</Button>
+      <Login />
     </div>
   );
 };
 
 export default App;
+
+//! Start time in 37 minutes
