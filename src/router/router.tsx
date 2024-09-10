@@ -4,6 +4,7 @@ import ResetPassword from "@/auth/ResetPassword";
 import SignUp from "@/auth/SignUp";
 import VerifyEmail from "@/auth/VerifyEmail";
 import HeroSection from "@/components/HeroSection/HeroSection";
+import Profile from "@/components/Profile/Profile";
 import Root from "@/Root/Root";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -15,6 +16,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <HeroSection />,
+      },
+      {
+        path: "/profile",
+        element: <Profile />,
       },
     ],
   },
