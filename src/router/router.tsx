@@ -3,6 +3,7 @@ import Login from "@/auth/Login";
 import ResetPassword from "@/auth/ResetPassword";
 import SignUp from "@/auth/SignUp";
 import VerifyEmail from "@/auth/VerifyEmail";
+import Cart from "@/components/Cart/Cart";
 import HeroSection from "@/components/HeroSection/HeroSection";
 import Profile from "@/components/Profile/Profile";
 import RestaurantDetails from "@/components/RestaurantDetails/RestaurantDetails";
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/restaurant/:id",
         element: <RestaurantDetails />,
+      },
+      {
+        path: "/cart",
+        element: <Cart />,
       },
     ],
   },
