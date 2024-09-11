@@ -6,3 +6,9 @@
 //   city: string;
 //   country: string;
 // };
+
+
+export interface FilterOptionState{
+    id :string;
+    label:string;
+}

@@ -5,6 +5,7 @@ import SignUp from "@/auth/SignUp";
 import VerifyEmail from "@/auth/VerifyEmail";
 import HeroSection from "@/components/HeroSection/HeroSection";
 import Profile from "@/components/Profile/Profile";
+import RestaurantDetails from "@/components/RestaurantDetails/RestaurantDetails";
 import SearchPage from "@/components/SearchPage/SearchPage";
 import Root from "@/Root/Root";
 import { createBrowserRouter } from "react-router-dom";
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "/search/:text",
         element: <SearchPage />,
+      },
+      {
+        path: "/restaurant/:id",
+        element: <RestaurantDetails />,
       },
     ],
   },
