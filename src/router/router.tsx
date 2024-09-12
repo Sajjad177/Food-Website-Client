@@ -1,3 +1,4 @@
+import AddMenu from "@/admin/AddMenu/AddMenu";
 import Restaurant from "@/admin/Restaurant/Restaurant";
 import ForgotPassword from "@/auth/ForgotPassword";
 import Login from "@/auth/Login";
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: "/admin/restaurant",
         element: <Restaurant />,
+      },
+      {
+        path: "/admin/menu",
+        element: <AddMenu />,
       },
     ],
   },

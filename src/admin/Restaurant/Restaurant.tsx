@@ -153,7 +153,7 @@ const Restaurant = () => {
                 />
                 {errors.imageFile && (
                   <span className="text-xs text-red-500 font-medium">
-                    {errors.imageFile?.name || "Image file is required"}
+                    {errors?.imageFile?.name || "Image file is required"}
                   </span>
                 )}
               </div>
