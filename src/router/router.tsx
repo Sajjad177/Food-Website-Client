@@ -8,6 +8,7 @@ import SignUp from "@/auth/SignUp";
 import VerifyEmail from "@/auth/VerifyEmail";
 import Cart from "@/components/Cart/Cart";
 import HeroSection from "@/components/HeroSection/HeroSection";
+import OrderSuccess from "@/components/OrderSuccess/OrderSuccess";
 import Profile from "@/components/Profile/Profile";
 import RestaurantDetails from "@/components/RestaurantDetails/RestaurantDetails";
 import SearchPage from "@/components/SearchPage/SearchPage";
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      {
+        path: "/order/status",
+        element: <OrderSuccess />,
       },
       //TODO : admin panel : ->
       {
