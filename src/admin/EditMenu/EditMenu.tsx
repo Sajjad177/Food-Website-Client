@@ -7,6 +7,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
+import { MenuFromSchema, menuSchema } from "@/Schema/menuSchema";
 import { DialogDescription } from "@radix-ui/react-dialog";
 import { Label } from "@radix-ui/react-label";
 import { Loader2 } from "lucide-react";
@@ -23,16 +24,18 @@ const EditMenu = ({
   editOpen,
   setEditOpen,
 }: {
-  selectedMenu: any;
+  selectedMenu: MenuFromSchema;
   editOpen: boolean;
   setEditOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const [input, setInput] = useState<any>({
+  const [input, setInput] = useState<MenuFromSchema>({
     name: "",
     description: "",
     price: 0,
     image: undefined,
   });
+  const [errors, setErrors] = useState<Partial<MenuFromSchema>>({});
+
   const loading = false;
 
   const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,6 +45,13 @@ const EditMenu = ({
 
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const result = menuSchema.safeParse(input);
+    if (!result.success) {
+      const fieldError = result.error.formErrors.fieldErrors;
+      setErrors(fieldError as Partial<MenuFromSchema>);
+      return;
+    }
+    // APi implement from there ->
     console.log(input);
   };
 
@@ -74,6 +84,11 @@ const EditMenu = ({
               onChange={changeEventHandler}
               placeholder="Enter menu name"
             />
+            {errors.name && (
+              <span className="text-xs text-red-500 font-medium">
+                {errors.name}
+              </span>
+            )}
           </div>
           <div>
             <Label>Description</Label>
@@ -84,6 +99,11 @@ const EditMenu = ({
               onChange={changeEventHandler}
               placeholder="Enter menu description"
             />
+            {errors.description && (
+              <span className="text-xs text-red-500 font-medium">
+                {errors.description}
+              </span>
+            )}
           </div>
           <div>
             <Label>Price in (tk)</Label>
@@ -94,6 +114,11 @@ const EditMenu = ({
               onChange={changeEventHandler}
               placeholder="Enter menu price"
             />
+            {errors.price && (
+              <span className="text-xs text-red-500 font-medium">
+                {errors.price}
+              </span>
+            )}
           </div>
           <div>
             <Label>Menu Image</Label>
@@ -108,6 +133,11 @@ const EditMenu = ({
               }
               accept="image/*"
             />
+            {errors.image && (
+              <span className="text-xs text-red-500 font-medium">
+                {errors.image?.name}
+              </span>
+            )}
           </div>
           <DialogFooter className="mt-2">
             {loading ? (
