@@ -1,3 +1,4 @@
+import Restaurant from "@/admin/Restaurant/Restaurant";
 import ForgotPassword from "@/auth/ForgotPassword";
 import Login from "@/auth/Login";
 import ResetPassword from "@/auth/ResetPassword";
@@ -35,6 +36,11 @@ const router = createBrowserRouter([
       {
         path: "/cart",
         element: <Cart />,
+      },
+      //TODO : admin panel : ->
+      {
+        path: "/admin/restaurant",
+        element: <Restaurant />,
       },
     ],
   },
