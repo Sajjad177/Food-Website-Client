@@ -55,6 +55,7 @@ const NavBar = () => {
             <Link to={"/profile"}>Profile</Link>
             <Link to={"/order/status"}>Order</Link>
 
+            {/* admin dashboard there  */}
             {admin && (
               <Menubar>
                 <MenubarMenu>
@@ -74,6 +75,8 @@ const NavBar = () => {
               </Menubar>
             )}
           </div>
+          
+          {/* dark and light mood add there */}
           <div className="flex items-center gap-4">
             <div>
               <DropdownMenu>

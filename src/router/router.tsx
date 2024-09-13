@@ -6,6 +6,7 @@ import Login from "@/auth/Login";
 import ResetPassword from "@/auth/ResetPassword";
 import SignUp from "@/auth/SignUp";
 import VerifyEmail from "@/auth/VerifyEmail";
+// import BannerSection from "@/components/BannerSection/BannerSection";
 import Cart from "@/components/Cart/Cart";
 import HeroSection from "@/components/HeroSection/HeroSection";
 import OrderSuccess from "@/components/OrderSuccess/OrderSuccess";
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <HeroSection />,
       },
+      // {
+      //   path:"/",
+      //   element:<BannerSection/>
+      // },
       {
         path: "/profile",
         element: <Profile />,
