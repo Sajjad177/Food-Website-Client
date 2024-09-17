@@ -17,6 +17,7 @@ import Root from "@/Root/Root";
 import { createBrowserRouter } from "react-router-dom";
 import PrivateRouter from "./PrivateRouter";
 import AuthenticatedUser from "./AuthenticatedUser";
+import AdminRoute from "./AdminRoute";
 
 const router = createBrowserRouter([
   {
@@ -58,15 +59,27 @@ const router = createBrowserRouter([
       //TODO : admin panel : ->
       {
         path: "/admin/restaurant",
-        element: <Restaurant />,
+        element: (
+          <AdminRoute>
+            <Restaurant />
+          </AdminRoute>
+        ),
       },
       {
         path: "/admin/menu",
-        element: <AddMenu />,
+        element: (
+          <AdminRoute>
+            <AddMenu />
+          </AdminRoute>
+        ),
       },
       {
         path: "/admin/orders",
-        element: <Orders />,
+        element: (
+          <AdminRoute>
+            <Orders />
+          </AdminRoute>
+        ),
       },
     ],
   },
