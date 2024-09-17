@@ -15,11 +15,16 @@ import RestaurantDetails from "@/components/RestaurantDetails/RestaurantDetails"
 import SearchPage from "@/components/SearchPage/SearchPage";
 import Root from "@/Root/Root";
 import { createBrowserRouter } from "react-router-dom";
+import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: (
+      <PrivateRouter>
+        <Root />
+      </PrivateRouter>
+    ),
     children: [
       {
         path: "/",

@@ -45,7 +45,7 @@ const NavBar = () => {
     <div className="max-w-7xl mx-auto">
       <div className="flex items-center justify-between h-14">
         <Link to={"/"}>
-          <h1 className="font-bold md:font-extrabold lg:text-2xl text-xl">
+          <h1 className="font-extrabold md:font-extrabold lg:text-2xl text-xl font-heading">
             TasteVibe
           </h1>
         </Link>
@@ -75,7 +75,7 @@ const NavBar = () => {
               </Menubar>
             )}
           </div>
-          
+
           {/* dark and light mood add there */}
           <div className="flex items-center gap-4">
             <div>
@@ -119,7 +119,7 @@ const NavBar = () => {
                 </Button>
               ) : (
                 <Button
-                  type="submit"
+                  
                   className="bg-indigo-600 hover:bg-indigo-700 text-white w-full py-2 rounded-md transition-all"
                 >
                   Login

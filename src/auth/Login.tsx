@@ -2,25 +2,26 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { LoginInputState, userLoginSchema } from "@/Schema/userSchema";
+import { useUserStore } from "@/store/useUserStore";
 import { Loader2, LockKeyhole, Mail } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
-  const loading = false;
   const [input, setInput] = useState<LoginInputState>({
     email: "",
     password: "",
   });
 
   const [errors, setErrors] = useState<Partial<LoginInputState>>({});
+  const { login, loading } = useUserStore();
 
   const ChangeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
 
-  const LoginSubmitHandler = (e: FormEvent) => {
+  const LoginSubmitHandler = async (e: FormEvent) => {
     e.preventDefault();
     const result = userLoginSchema.safeParse(input);
     if (!result.success) {
@@ -28,7 +29,8 @@ const Login = () => {
       setErrors(fieldErrors as Partial<LoginInputState>);
       return;
     }
-
+    // Login api implementation there :
+    await login(input);
     console.log(input);
   };
 
@@ -39,7 +41,9 @@ const Login = () => {
         className="bg-white p-6 md:p-8 w-full max-w-md md:border md:shadow-lg border-none shadow-none rounded-lg"
       >
         <div className="mb-6 text-center">
-          <h1 className="font-bold text-3xl text-gray-800">Food House</h1>
+          <h1 className="font-extrabold text-4xl text-gray-800 font-heading">
+            TasteVibe
+          </h1>
         </div>
         <div className="relative mb-4">
           <Input

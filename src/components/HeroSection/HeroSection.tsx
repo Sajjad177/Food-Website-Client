@@ -14,7 +14,7 @@ const HeroSection = () => {
       {/* Text Section */}
       <div className="flex flex-col gap-6 md:gap-10 md:w-[50%] lg:w-[40%]">
         <div className="flex flex-col gap-3 md:gap-5">
-          <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl">
+          <h1 className="font-bold text-4xl md:text-5xl lg:text-6xl font-heading">
             Order Food anytime & anywhere
           </h1>
           <p className="text-gray-600 md:text-lg">

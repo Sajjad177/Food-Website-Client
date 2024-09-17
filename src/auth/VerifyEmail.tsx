@@ -1,12 +1,13 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useUserStore } from "@/store/useUserStore";
 import { Loader2 } from "lucide-react";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, FormEvent } from "react";
 
 const VerifyEmail = () => {
-    const loading = false;
   const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
-  const inputRef = useRef<HTMLInputElement[]>([]); 
+  const inputRef = useRef<HTMLInputElement[]>([]);
+  const { loading, verifyEmail } = useUserStore();
 
   const handleChange = (idx: number, value: string) => {
     // Validate the input value (only alphanumeric characters allowed)
@@ -34,6 +35,13 @@ const VerifyEmail = () => {
     }
   };
 
+  const submitHandler = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const verificationCode = otp.join("");
+    // verify api implementation there :
+    await verifyEmail(verificationCode);
+  };
+
   return (
     <div className="flex items-center justify-center h-screen w-full bg-gray-100">
       <div className="p-8 rounded-lg w-full max-w-md flex flex-col items-center bg-white md:border md:border-gray-200 md:shadow-lg">
@@ -45,7 +53,7 @@ const VerifyEmail = () => {
         </p>
 
         {/* OTP Input Fields */}
-        <form>
+        <form onSubmit={submitHandler}>
           <div className="flex justify-center gap-2 md:gap-4 mb-4">
             {otp.map((letter, idx) => (
               <Input

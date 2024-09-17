@@ -2,12 +2,12 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Separator } from "@/components/ui/separator";
 import { SignUpInputState, userSignUpSchema } from "@/Schema/userSchema";
+import { useUserStore } from "@/store/useUserStore";
 import { Loader2, LockKeyhole, Mail, PhoneCallIcon, User } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
 import { Link } from "react-router-dom";
 
 const SignUp = () => {
-  const loading = false;
   const [input, setInput] = useState<SignUpInputState>({
     fullName: "",
     email: "",
@@ -16,13 +16,14 @@ const SignUp = () => {
   });
 
   const [errors, setErrors] = useState<Partial<SignUpInputState>>({});
+  const { signUp, loading } = useUserStore();
 
   const ChangeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
 
-  const SignUpSubmitHandler = (e: FormEvent) => {
+  const SignUpSubmitHandler = async (e: FormEvent) => {
     e.preventDefault();
     //Form validation checking ->
     const result = userSignUpSchema.safeParse(input);
@@ -31,8 +32,8 @@ const SignUp = () => {
       setErrors(fieldErrors as Partial<SignUpInputState>);
       return;
     }
-    // SignUp API implementation :
-    console.log(input);
+    //TODO: calling signUp api implementation there :
+    await signUp(input);
   };
 
   return (
@@ -42,7 +43,9 @@ const SignUp = () => {
         className="bg-white p-6 md:p-8 w-full max-w-md border-none shadow-none md:border md:shadow-lg rounded-lg"
       >
         <div className="mb-4 text-center">
-          <h1 className="font-bold text-3xl text-gray-800">Food House</h1>
+          <h1 className="font-extrabold text-5xl text-gray-800 font-heading">
+            TasteVibe
+          </h1>
         </div>
         <div className="relative mb-4">
           <Input
