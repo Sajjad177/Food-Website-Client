@@ -16,6 +16,7 @@ import SearchPage from "@/components/SearchPage/SearchPage";
 import Root from "@/Root/Root";
 import { createBrowserRouter } from "react-router-dom";
 import PrivateRouter from "./PrivateRouter";
+import AuthenticatedUser from "./AuthenticatedUser";
 
 const router = createBrowserRouter([
   {
@@ -71,15 +72,27 @@ const router = createBrowserRouter([
   },
   {
     path: "/login",
-    element: <Login />,
+    element: (
+      <AuthenticatedUser>
+        <Login />
+      </AuthenticatedUser>
+    ),
   },
   {
     path: "/signUp",
-    element: <SignUp />,
+    element: (
+      <AuthenticatedUser>
+        <SignUp />
+      </AuthenticatedUser>
+    ),
   },
   {
     path: "/forgot-password",
-    element: <ForgotPassword />,
+    element: (
+      <AuthenticatedUser>
+        <ForgotPassword />
+      </AuthenticatedUser>
+    ),
   },
   {
     path: "/reset-password",
