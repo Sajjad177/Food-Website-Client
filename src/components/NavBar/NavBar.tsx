@@ -37,10 +37,11 @@ import {
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { Separator } from "../ui/separator";
+import { useUserStore } from "@/store/useUserStore";
 
 const NavBar = () => {
-  const admin = true;
-  const loading = false;
+  const { user, loading, logout } = useUserStore();
+  console.log(user);
   return (
     <div className="max-w-7xl mx-auto">
       <div className="flex items-center justify-between h-14">
@@ -54,9 +55,9 @@ const NavBar = () => {
             <Link to={"/"}>Home</Link>
             <Link to={"/profile"}>Profile</Link>
             <Link to={"/order/status"}>Order</Link>
-
             {/* admin dashboard there  */}
-            {admin && (
+            change there user?.admin
+            {user && (
               <Menubar>
                 <MenubarMenu>
                   <MenubarTrigger>Dashboard</MenubarTrigger>
@@ -119,10 +120,10 @@ const NavBar = () => {
                 </Button>
               ) : (
                 <Button
-                  
+                  onClick={logout}
                   className="bg-indigo-600 hover:bg-indigo-700 text-white w-full py-2 rounded-md transition-all"
                 >
-                  Login
+                  Logout
                 </Button>
               )}
             </div>
@@ -140,6 +141,7 @@ const NavBar = () => {
 export default NavBar;
 
 const MobileNavbar = () => {
+  const { user, logout } = useUserStore();
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -193,27 +195,33 @@ const MobileNavbar = () => {
             <ShoppingCart />
             <span>Cart(0)</span>
           </Link>
-          <Link
-            to={"/admin/menu"}
-            className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
-          >
-            <SquareMenuIcon />
-            <span>Menu</span>
-          </Link>
-          <Link
-            to={"/admin/restaurant"}
-            className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
-          >
-            <UtensilsCrossed />
-            <span>Restaurant</span>
-          </Link>
-          <Link
-            to={"/admin/orders"}
-            className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
-          >
-            <PackageCheck />
-            <span>Restaurant Orders</span>
-          </Link>
+          {/* Mobile admin router add there */}
+          change there user?.admin
+          {user && (
+            <>
+              <Link
+                to={"/admin/menu"}
+                className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
+              >
+                <SquareMenuIcon />
+                <span>Menu</span>
+              </Link>
+              <Link
+                to={"/admin/restaurant"}
+                className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
+              >
+                <UtensilsCrossed />
+                <span>Restaurant</span>
+              </Link>
+              <Link
+                to={"/admin/orders"}
+                className="flex items-center gap-4 hover:bg-gray-200 px-3 py-2 rounded-lg cursor-pointer hover:text-gray-900 font-medium"
+              >
+                <PackageCheck />
+                <span>Restaurant Orders</span>
+              </Link>
+            </>
+          )}
         </SheetDescription>
         <SheetFooter className="flex flex-col gap-5">
           <div className="flex flex-row items-center gap-2">
@@ -225,8 +233,11 @@ const MobileNavbar = () => {
           </div>
 
           <SheetClose asChild>
-            <Button className="bg-indigo-600 hover:bg-indigo-700 text-white w-full py-2 rounded-md transition-all">
-              Login
+            <Button
+              onClick={logout}
+              className="bg-indigo-600 hover:bg-indigo-700 text-white w-full py-2 rounded-md transition-all"
+            >
+              Logout
             </Button>
           </SheetClose>
         </SheetFooter>

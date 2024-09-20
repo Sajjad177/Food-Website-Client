@@ -5,11 +5,11 @@ const AdminRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, user } = useUserStore();
 
   if (!isAuthenticated) {
-    return <Navigate to={"login"} replace />;
+    return <Navigate to="/login" replace />;
   }
 
   if (!user?.admin) {
-    return <Navigate to={"/"} replace />;
+    return <Navigate to="/" replace />;
   }
 
   return children;

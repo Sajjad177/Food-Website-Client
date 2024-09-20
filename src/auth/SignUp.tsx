@@ -5,7 +5,7 @@ import { SignUpInputState, userSignUpSchema } from "@/Schema/userSchema";
 import { useUserStore } from "@/store/useUserStore";
 import { Loader2, LockKeyhole, Mail, PhoneCallIcon, User } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SignUp = () => {
   const [input, setInput] = useState<SignUpInputState>({
@@ -17,6 +17,7 @@ const SignUp = () => {
 
   const [errors, setErrors] = useState<Partial<SignUpInputState>>({});
   const { signUp, loading } = useUserStore();
+  const navigate = useNavigate();
 
   const ChangeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -33,7 +34,12 @@ const SignUp = () => {
       return;
     }
     //TODO: calling signUp api implementation there :
-    await signUp(input);
+    try {
+      await signUp(input);
+      navigate("/verifyEmail");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

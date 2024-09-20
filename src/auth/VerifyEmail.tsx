@@ -3,11 +3,13 @@ import { Input } from "@/components/ui/input";
 import { useUserStore } from "@/store/useUserStore";
 import { Loader2 } from "lucide-react";
 import React, { useState, useRef, FormEvent } from "react";
+import { useNavigate } from "react-router-dom";
 
 const VerifyEmail = () => {
   const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);
   const inputRef = useRef<HTMLInputElement[]>([]);
   const { loading, verifyEmail } = useUserStore();
+  const navigate = useNavigate();
 
   const handleChange = (idx: number, value: string) => {
     // Validate the input value (only alphanumeric characters allowed)
@@ -39,7 +41,12 @@ const VerifyEmail = () => {
     e.preventDefault();
     const verificationCode = otp.join("");
     // verify api implementation there :
-    await verifyEmail(verificationCode);
+    try {
+      await verifyEmail(verificationCode);
+      navigate("/")
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (

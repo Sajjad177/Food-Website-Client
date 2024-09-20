@@ -5,7 +5,7 @@ import { LoginInputState, userLoginSchema } from "@/Schema/userSchema";
 import { useUserStore } from "@/store/useUserStore";
 import { Loader2, LockKeyhole, Mail } from "lucide-react";
 import { ChangeEvent, FormEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [input, setInput] = useState<LoginInputState>({
@@ -15,6 +15,7 @@ const Login = () => {
 
   const [errors, setErrors] = useState<Partial<LoginInputState>>({});
   const { login, loading } = useUserStore();
+  const navigate = useNavigate()
 
   const ChangeEventHandler = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -30,8 +31,12 @@ const Login = () => {
       return;
     }
     // Login api implementation there :
-    await login(input);
-    console.log(input);
+    try {
+      await login(input);
+      navigate("/")
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (

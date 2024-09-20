@@ -5,6 +5,7 @@ import {
   restaurantFormSchema,
   RestaurantFormSchema,
 } from "@/Schema/restaurantSchema";
+import { useRestaurantStore } from "@/store/useRestaurantStore";
 import { Loader2 } from "lucide-react";
 import { FormEvent, useState } from "react";
 
@@ -19,6 +20,7 @@ const Restaurant = () => {
   });
 
   const [errors, setErrors] = useState<Partial<RestaurantFormSchema>>({});
+  const { loading, createRestaurant } = useRestaurantStore();
 
   const changeEventHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type } = e.target;
@@ -34,10 +36,20 @@ const Restaurant = () => {
       return;
     }
     // API implementation here ->
-    console.log(input);
+    const formData = new FormData();
+    formData.append("restaurantName", input.restaurantName);
+    formData.append("city", input.city);
+    formData.append("country", input.country);
+    formData.append("deliveryTime", input.deliveryTime.toString());
+    formData.append("cuisines", JSON.stringify(input.cuisines));
+
+    if (input.imageFile) {
+      formData.append("imageFile", input.imageFile);
+    }
+
+    //! Time will start in 14:18:00
   };
 
-  const loading = false;
   const restaurantHave = false;
 
   return (
